@@ -18,17 +18,17 @@ export function Navigation() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center justify-between">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex h-20 items-center justify-between">
         <Link href="/" className="font-bold text-xl hover:text-primary transition-colors duration-200">
           Guillem Pedrerol
         </Link>
 
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden md:flex items-center gap-6">
           {routes.map((route) => (
             <Link
               key={route.href}
               href={route.href}
-              className="nav-link"
+              className="nav-link text-base hover:text-primary transition-colors duration-200"
             >
               {route.label}
             </Link>
@@ -51,13 +51,13 @@ export function Navigation() {
                 <Link
                   key={route.href}
                   href={route.href}
-                  className="nav-link text-base"
+                  className="nav-link text-base hover:text-primary transition-colors duration-200"
                   onClick={() => setIsOpen(false)}
                 >
                   {route.label}
                 </Link>
               ))}
-              <div className="px-2 pt-2 border-t">
+              <div className="py-2">
                 <ModeToggle />
               </div>
             </nav>

@@ -20,6 +20,7 @@ import { Experience } from '@/components/experience';
 import { Testimonials } from '@/components/testimonials';
 import { Projects } from '@/components/projects';
 import { CompanyLogos } from '@/components/company-logos';
+import { BorderBeam } from "@/components/ui/border-beam";
 
 export default function Home() {
   return (
@@ -40,13 +41,22 @@ export default function Home() {
               <p className="mb-6 md:mb-8 text-lg md:text-xl text-muted-foreground">
                 Helping businesses leverage artificial intelligence to transform their productivity through practical implementation and training.
               </p>
-              <div className="flex flex-wrap gap-3 md:gap-4">
-                <Button asChild size="lg" className="button-primary w-full sm:w-auto">
-                  <Link href="#contact">
-                    Get Started
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
+              <div className="flex gap-4">
+                <div className="relative rounded-md">
+                  <Button asChild size="lg" className="relative bg-primary text-primary-foreground hover:bg-primary/90">
+                    <Link href="#contact">
+                      Get Started
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <BorderBeam
+                    size={200}
+                    duration={4}
+                    colorFrom="#9c40ff"
+                    colorTo="#ffaa40"
+                    borderWidth={1.5}
+                  />
+                </div>
                 <Button variant="outline" size="lg" asChild className="button-secondary w-full sm:w-auto">
                   <Link href="#services">Learn More</Link>
                 </Button>
