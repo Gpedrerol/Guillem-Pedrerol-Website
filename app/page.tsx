@@ -55,7 +55,7 @@ export default function Home() {
             <div className="w-full lg:w-1/2 px-4">
               <div className="relative mx-auto max-w-md">
                 <Image
-                  src="/images/Human and AI 1.png"
+                  src="/images/Human and AI 2.png"
                   alt="AI and Human Connection"
                   width={800}
                   height={1000}
