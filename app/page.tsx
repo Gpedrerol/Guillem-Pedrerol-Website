@@ -16,11 +16,12 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Experience } from '@/components/experience';
 import { Testimonials } from '@/components/testimonials';
 import { Projects } from '@/components/projects';
 import { CompanyLogos } from '@/components/company-logos';
 import { BorderBeam } from "@/components/ui/border-beam";
+import { ProfessionalExperience } from '@/components/professional-experience';
+import { Education } from '@/components/education';
 
 export default function Home() {
   return (
@@ -162,44 +163,53 @@ export default function Home() {
       {/* About Section */}
       <section id="about" className="py-16">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            <div className="space-y-8">
-              <div>
-                <h2 className="text-3xl font-bold mb-6">About Me</h2>
-                <div className="space-y-4">
-                  <p className="text-muted-foreground">
-                    At 26, I'm an AI Implementation Consultant and Corporate Trainer based in Madrid, 
-                    working with clients globally. My journey in technology and business has taken me 
-                    from Silicon Valley to China, shaping my unique perspective on AI implementation.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary">
-                      <Languages className="w-4 h-4 mr-1" />
-                      ES/EN/CAT
-                    </Badge>
-                    <Badge variant="secondary">
-                      <GraduationCap className="w-4 h-4 mr-1" />
-                      Management & Technology
-                    </Badge>
-                    <Badge variant="secondary">
-                      <Building2 className="w-4 h-4 mr-1" />
-                      Remote/On-site
-                    </Badge>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            {/* Left Column - About Me and Education */}
+            <div className="space-y-12">
+              {/* About Me */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h2 className="text-3xl font-bold mb-6">About Me</h2>
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      At 26, I'm an AI Implementation Consultant and Corporate Trainer based in Madrid, 
+                      working with clients globally. My journey in technology and business has taken me 
+                      from Silicon Valley to China, shaping my unique perspective on AI implementation.
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary">
+                        <Languages className="w-4 h-4 mr-1" />
+                        ES/EN/CAT
+                      </Badge>
+                      <Badge variant="secondary">
+                        <GraduationCap className="w-4 h-4 mr-1" />
+                        Management & Technology
+                      </Badge>
+                      <Badge variant="secondary">
+                        <Building2 className="w-4 h-4 mr-1" />
+                        Remote/On-site
+                      </Badge>
+                    </div>
                   </div>
                 </div>
+                <div>
+                  <Image
+                    src="/images/guillem Montenegro.jpeg"
+                    alt="Guillem Pedrerol"
+                    width={400}
+                    height={400}
+                    className="rounded-2xl shadow-lg object-cover w-full max-w-md mx-auto transition-all duration-300 hover:shadow-xl"
+                    priority
+                  />
+                </div>
               </div>
-              <div className="mt-6">
-                <Image
-                  src="/images/guillem Montenegro.jpeg"
-                  alt="Guillem Pedrerol"
-                  width={400}
-                  height={400}
-                  className="rounded-2xl shadow-lg object-cover w-full max-w-md transition-all duration-300 hover:shadow-xl"
-                  priority
-                />
-              </div>
+              {/* Education */}
+              <Education />
             </div>
-            <Experience />
+            {/* Right Column - Professional Experience */}
+            <div>
+              <ProfessionalExperience />
+            </div>
           </div>
         </div>
       </section>
