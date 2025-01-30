@@ -1,64 +1,99 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ArrowUpRight } from 'lucide-react';
-import Image from 'next/image';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const projects = [
-  {
-    title: 'AI Art Posters',
-    description: 'E-commerce platform selling AI-generated art pieces using Stable Diffusion and Midjourney.',
-    image: 'https://images.unsplash.com/photo-1634986666676-ec8fd927c23d?q=80&w=2940&auto=format&fit=crop',
-    tags: ['Shopify', 'AI Art', 'E-commerce'],
-    link: '#'
-  },
-  {
-    title: 'TheTripAI',
-    description: 'AI-powered travel planning platform using GPT technology for personalized itineraries.',
-    image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=2935&auto=format&fit=crop',
-    tags: ['GPT-4', 'Travel Tech', 'AI'],
-    link: '#'
-  },
-  {
-    title: 'McNeel Europe Training',
-    description: 'Comprehensive AI training program for McNeel Europe employees.',
-    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2940&auto=format&fit=crop',
-    tags: ['Corporate Training', 'AI Implementation', 'Education'],
-    link: '#'
-  }
-];
+// Project images mapping with Unsplash images
+const projectImages = {
+  'AI Art Posters': 'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2940&auto=format&fit=crop',
+  'TheTripAI': 'https://images.unsplash.com/photo-1488085061387-422e29b40080?q=80&w=2931&auto=format&fit=crop',
+  'McNeel Europe Training': 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2940&auto=format&fit=crop'
+};
+
+// Project links mapping
+const projectLinks = {
+  'AI Art Posters': 'https://aiartposters.store',
+  'TheTripAI': 'https://thetripai.com',
+  'McNeel Europe Training': 'https://www.rhino3d.com'
+};
 
 export function Projects() {
+  const { translation } = useLanguage();
+
   return (
-    <section className="py-16 bg-muted/50">
-      <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <Card key={index} className="overflow-hidden group">
-              <div className="relative h-48">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 flex items-center justify-between">
-                  {project.title}
-                  <ArrowUpRight className="h-4 w-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <p className="text-muted-foreground mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <Badge key={i} variant="secondary">{tag}</Badge>
-                  ))}
+    <section id="projects" className="scroll-mt-20 py-24 bg-background">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="flex items-center justify-center mb-4">
+            <div className="h-px w-8 bg-primary/60"></div>
+            <span className="mx-4 text-sm font-semibold uppercase tracking-wider text-primary/80">Featured Work</span>
+            <div className="h-px w-8 bg-primary/60"></div>
+          </div>
+          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            {translation.projects.title}
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Discover how we've helped businesses transform their operations with AI solutions and training programs
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {translation.projects.items.map((project, index) => {
+            const projectLink = projectLinks[project.title];
+            const imageUrl = projectImages[project.title];
+            
+            return (
+              <Card key={index} className="group overflow-hidden border transition-all duration-300 hover:shadow-xl hover:border-primary/50">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
+                    src={imageUrl || 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2940&auto=format&fit=crop'}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
                 </div>
-              </div>
-            </Card>
-          ))}
+                <CardHeader>
+                  <CardTitle>{project.title}</CardTitle>
+                  <CardDescription>{project.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, tagIndex) => (
+                      <Badge key={tagIndex} variant="secondary" className="text-sm">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button variant="outline" asChild className="group/button">
+                    <Link 
+                      href={projectLink || '#'} 
+                      target={projectLink ? "_blank" : undefined}
+                      rel={projectLink ? "noopener noreferrer" : undefined}
+                      className="flex items-center gap-2"
+                    >
+                      {projectLink ? 'View Project' : 'Coming Soon'}
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/button:translate-x-1" />
+                    </Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

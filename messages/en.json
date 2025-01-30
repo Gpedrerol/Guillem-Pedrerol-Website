@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Transforming Businesses Through AI Implementation",
+    "subtitle": "Helping companies leverage AI technology to automate processes, enhance efficiency, and drive innovation.",
+    "cta": "Get Started"
+  },
+  "services": {
+    "title": "Services",
+    "consultation": {
+      "title": "AI Consultation",
+      "description": "Expert guidance on integrating AI into your business operations",
+      "features": [
+        "Custom chatbot development",
+        "Process automation",
+        "AI strategy planning"
+      ]
+    },
+    "training": {
+      "title": "Corporate Training",
+      "description": "Comprehensive AI training programs for your team",
+      "features": [
+        "ChatGPT implementation",
+        "Custom training programs",
+        "Hands-on workshops"
+      ]
+    },
+    "development": {
+      "title": "Custom Solutions",
+      "description": "Tailored AI solutions for your specific needs",
+      "features": [
+        "SEO optimization",
+        "Shopify development",
+        "Process optimization"
+      ]
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "description": "At 26, I'm an AI Implementation Consultant and Corporate Trainer based in Madrid, working with clients globally. My journey in technology and business has taken me from Silicon Valley to China, shaping my unique perspective on AI implementation.",
+    "badges": {
+      "languages": "ES/EN/CAT",
+      "education": "Management & Technology",
+      "location": "Remote/On-site"
+    }
+  },
+  "experience": {
+    "title": "Professional Experience",
+    "current": {
+      "title": "AI Implementation Consultant & Corporate Trainer",
+      "company": "Freelance",
+      "period": "Oct 2023 - Present",
+      "description": "Providing tailored AI solutions and consulting services for companies like McNeel Europe, TennisExpress México, and RhinoLands. Delivering structured AI formation programs and implementing automation solutions.",
+      "achievements": [
+        "Developed customized customer service chatbots",
+        "Automated SEO content creation",
+        "Designed master prompts for brand communication"
+      ]
+    }
+  },
+  "education": {
+    "title": "Education",
+    "degree": {
+      "title": "Management of Business and Technology",
+      "institution": "La Salle Barcelona",
+      "period": "2016 - 2020",
+      "details": "Concentration in Digital Economy"
+    },
+    "exchange": {
+      "title": "Exchange Program",
+      "institution": "Saint Mary's College of California",
+      "period": "2018 - 2019",
+      "details": "Silicon Valley experience and entrepreneurial business culture"
+    }
+  },
+  "contact": {
+    "title": "Let's Work Together",
+    "subtitle": "Ready to transform your business with AI? Get in touch to discuss how we can help you achieve your goals.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "company": "Company",
+      "companyPlaceholder": "Your company",
+      "service": "Service",
+      "servicePlaceholder": "Select a service",
+      "serviceOptions": {
+        "aiImplementation": "AI Implementation",
+        "corporateTraining": "Corporate Training",
+        "processAutomation": "Process Automation",
+        "customDevelopment": "Custom Development",
+        "other": "Other"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project or inquiry",
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "successDetail": "Thank you for reaching out. I'll get back to you soon.",
+      "error": "Error sending message",
+      "errorDetail": "Please try again later or contact me directly via email."
+    }
+  }
+}

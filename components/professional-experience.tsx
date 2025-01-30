@@ -1,6 +1,9 @@
+'use client';
+
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Briefcase } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const experiences = [
   {
@@ -51,14 +54,16 @@ const experiences = [
 ];
 
 export function ProfessionalExperience() {
+  const { translation } = useLanguage();
+
   return (
     <div>
       <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
         <Briefcase className="h-6 w-6" />
-        Professional Experience
+        {translation.experience.title}
       </h3>
       <div className="space-y-6">
-        {experiences.map((exp, index) => (
+        {translation.experience.jobs.map((exp, index) => (
           <Card key={index} className="p-6">
             <div className="mb-4">
               <h4 className="text-xl font-semibold">{exp.title}</h4>

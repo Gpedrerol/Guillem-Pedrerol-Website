@@ -1,0 +1,109 @@
+{
+  "navigation": {
+    "services": "Servicios",
+    "about": "Sobre mí",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Transformando Empresas a través de la Implementación de IA",
+    "subtitle": "Ayudando a empresas a aprovechar la tecnología de IA para automatizar procesos, mejorar la eficiencia e impulsar la innovación.",
+    "cta": "Empezar"
+  },
+  "services": {
+    "title": "Servicios",
+    "consultation": {
+      "title": "Consultoría de IA",
+      "description": "Orientación experta en la integración de IA en las operaciones de tu empresa",
+      "features": [
+        "Desarrollo de chatbots personalizados",
+        "Automatización de procesos",
+        "Planificación estratégica de IA"
+      ]
+    },
+    "training": {
+      "title": "Formación Corporativa",
+      "description": "Programas completos de formación en IA para tu equipo",
+      "features": [
+        "Implementación de ChatGPT",
+        "Programas de formación personalizados",
+        "Talleres prácticos"
+      ]
+    },
+    "development": {
+      "title": "Soluciones Personalizadas",
+      "description": "Soluciones de IA adaptadas a tus necesidades específicas",
+      "features": [
+        "Optimización SEO",
+        "Desarrollo en Shopify",
+        "Optimización de procesos"
+      ]
+    }
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "description": "Con 26 años, soy Consultor de Implementación de IA y Formador Corporativo basado en Madrid, trabajando con clientes globalmente. Mi trayectoria en tecnología y negocios me ha llevado desde Silicon Valley hasta China, moldeando mi perspectiva única sobre la implementación de IA.",
+    "badges": {
+      "languages": "ES/EN/CAT",
+      "education": "Gestión y Tecnología",
+      "location": "Remoto/Presencial"
+    }
+  },
+  "experience": {
+    "title": "Experiencia Profesional",
+    "current": {
+      "title": "Consultor de Implementación de IA y Formador Corporativo",
+      "company": "Freelance",
+      "period": "Oct 2023 - Presente",
+      "description": "Proporcionando soluciones de IA personalizadas y servicios de consultoría para empresas como McNeel Europe, TennisExpress México y RhinoLands. Impartiendo programas estructurados de formación en IA e implementando soluciones de automatización.",
+      "achievements": [
+        "Desarrollo de chatbots personalizados para servicio al cliente",
+        "Automatización de creación de contenido SEO",
+        "Diseño de prompts maestros para comunicación de marca"
+      ]
+    }
+  },
+  "education": {
+    "title": "Educación",
+    "degree": {
+      "title": "Gestión de Empresas y Tecnología",
+      "institution": "La Salle Barcelona",
+      "period": "2016 - 2020",
+      "details": "Especialización en Economía Digital"
+    },
+    "exchange": {
+      "title": "Programa de Intercambio",
+      "institution": "Saint Mary's College of California",
+      "period": "2018 - 2019",
+      "details": "Experiencia en Silicon Valley y cultura empresarial emprendedora"
+    }
+  },
+  "contact": {
+    "title": "Trabajemos Juntos",
+    "subtitle": "¿Listo para transformar tu negocio con IA? Contáctame para discutir cómo podemos ayudarte a alcanzar tus objetivos.",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu.correo@ejemplo.com",
+      "company": "Empresa",
+      "companyPlaceholder": "Tu empresa",
+      "service": "Servicio",
+      "servicePlaceholder": "Selecciona un servicio",
+      "serviceOptions": {
+        "aiImplementation": "Implementación de IA",
+        "corporateTraining": "Formación Corporativa",
+        "processAutomation": "Automatización de Procesos",
+        "customDevelopment": "Desarrollo Personalizado",
+        "other": "Otro"
+      },
+      "message": "Mensaje",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto o consulta",
+      "submit": "Enviar mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado con éxito!",
+      "successDetail": "Gracias por contactarme. Me pondré en contacto contigo pronto.",
+      "error": "Error al enviar el mensaje",
+      "errorDetail": "Por favor, inténtalo de nuevo más tarde o contáctame directamente por correo electrónico."
+    }
+  }
+}

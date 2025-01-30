@@ -129,6 +129,34 @@
   .section-fade-in.visible {
     @apply opacity-100 translate-y-0;
   }
+
+  .prose {
+    @apply text-foreground;
+  }
+  
+  .prose a {
+    @apply text-primary hover:text-primary/80 transition-colors no-underline;
+  }
+
+  .prose strong {
+    @apply text-primary font-semibold;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-bold mt-8 mb-4 text-foreground;
+  }
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose ul {
+    @apply list-disc list-inside mb-4;
+  }
+
+  .prose ol {
+    @apply list-decimal list-inside mb-4;
+  }
 }
 
 /* Smooth scrolling */

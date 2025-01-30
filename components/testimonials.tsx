@@ -1,8 +1,9 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import { Quote } from 'lucide-react';
-import { Marquee } from '@/components/ui/marquee';
+import { Card } from "@/components/ui/card";
+import { Quote } from "lucide-react";
+import { Marquee } from "@/components/ui/marquee";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const testimonials = [
   {
@@ -43,25 +44,40 @@ const testimonials = [
 ];
 
 export function Testimonials() {
+  const { translation } = useLanguage();
+
   return (
-    <section className="py-16 bg-muted/50">
-      <div className="container mb-8">
-        <h2 className="text-3xl font-bold text-center mb-2">Client Testimonials</h2>
-        <p className="text-muted-foreground text-center">What professionals say about my AI training</p>
+    <section id="testimonials" className="scroll-mt-20 py-24 bg-background">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="flex items-center justify-center mb-4">
+            <div className="h-px w-8 bg-primary/60"></div>
+            <span className="mx-4 text-sm font-semibold uppercase tracking-wider text-primary/80">What People Say</span>
+            <div className="h-px w-8 bg-primary/60"></div>
+          </div>
+          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+            {translation.testimonials.title}
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            {translation.testimonials.subtitle}
+          </p>
+        </div>
+
+        <div className="relative">
+          <Marquee className="py-12" pauseOnHover speed={40}>
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="w-[400px] p-6 mx-4 bg-card">
+                <Quote className="h-8 w-8 text-primary mb-4" />
+                <p className="text-muted-foreground mb-4">{testimonial.quote}</p>
+                <div>
+                  <p className="font-semibold">{testimonial.author}</p>
+                  <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+                </div>
+              </Card>
+            ))}
+          </Marquee>
+        </div>
       </div>
-      
-      <Marquee className="py-4" speed="slow">
-        {testimonials.map((testimonial, index) => (
-          <Card key={index} className="p-6 mx-4 w-[450px] flex-shrink-0 card">
-            <Quote className="h-8 w-8 text-primary mb-4" />
-            <p className="text-muted-foreground mb-4 text-sm">{testimonial.quote}</p>
-            <div>
-              <p className="font-semibold">{testimonial.author}</p>
-              <p className="text-sm text-muted-foreground">{testimonial.position}</p>
-            </div>
-          </Card>
-        ))}
-      </Marquee>
     </section>
   );
 }
