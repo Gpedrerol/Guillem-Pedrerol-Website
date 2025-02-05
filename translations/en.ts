@@ -1,36 +1,78 @@
 export const en = {
   navigation: {
     services: 'Services',
+    aiConsulting: 'AI Consulting',
+    training: 'Training',
     about: 'About',
-    contact: 'Contact',
     blog: 'Blog',
-    aiConsulting: 'AI Consulting'
+    contact: 'Contact',
   },
   hero: {
-    title: 'Empowering Businesses with Practical AI Solutions',
+    title: 'AI Solutions for Business Growth',
     titleHighlight: 'Practical AI Solutions',
     subtitle: 'Helping businesses leverage artificial intelligence to transform their productivity through practical implementation and training.',
     cta: 'Get Started',
+    secondaryCta: 'Explore Services',
+    badges: {
+      available: 'Available for Projects',
+    }
   },
   services: {
-    title: 'Services',
+    sectionTitle: 'WHAT WE DO',
+    title: 'Transform Your Business',
+    subtitle: 'Strategic consulting and comprehensive training programs to help your organization thrive in the AI era.',
     consultation: {
       title: 'AI Consulting',
       description: 'Strategic AI implementation tailored to your business needs',
       features: [
         'Custom chatbot development',
         'Process automation',
-        'AI strategy planning',
+        'Strategic AI planning',
       ],
+      benefits: {
+        title: 'Key Benefits',
+        items: [
+          'Custom chatbot development',
+          'Process automation',
+          'Strategic AI planning'
+        ]
+      },
+      approach: {
+        title: 'Our Approach',
+        items: [
+          'Strategic assessment of AI opportunities',
+          'Customized implementation roadmap',
+          'Industry-specific solutions'
+        ]
+      },
+      cta: {
+        explore: 'Explore AI Consulting',
+        schedule: 'Schedule Consultation'
+      }
     },
     training: {
       title: 'Corporate Training',
-      description: 'Comprehensive AI workshops and training programs',
-      features: [
-        'ChatGPT implementation',
-        'Custom training programs',
-        'Hands-on workshops',
-      ],
+      description: 'Comprehensive AI training programs and workshops',
+      features: {
+        title: 'Program Features',
+        items: [
+          'ChatGPT implementation',
+          'Custom training programs',
+          'Practical workshops'
+        ]
+      },
+      methods: {
+        title: 'Training Methods',
+        items: [
+          'Interactive workshops and hands-on sessions',
+          'Role-specific skill development',
+          'Continuous learning and support'
+        ]
+      },
+      cta: {
+        explore: 'Explore Training Programs',
+        request: 'Request Training Info'
+      }
     },
     development: {
       title: 'Digital Transformation',
@@ -254,8 +296,10 @@ export const en = {
     }
   },
   about: {
-    title: 'About Me',
-    description: "At 26, I'm an AI Implementation Consultant and Corporate Trainer based in Madrid, working with clients globally. My journey in technology and business has taken me from Silicon Valley to China, shaping my unique perspective on AI implementation.",
+    sectionTitle: 'ABOUT',
+    title: 'AI Implementation Consultant',
+    subtitle: 'Bridging the gap between AI technology and business success',
+    professionalExperience: 'My Journey',
     badges: {
       languages: 'ES/EN/CAT',
       education: 'Management & Technology',
@@ -328,7 +372,9 @@ export const en = {
     ]
   },
   projects: {
+    sectionTitle: 'PORTFOLIO',
     title: 'Featured Projects',
+    subtitle: 'Discover how we\'ve helped businesses transform their operations with AI solutions and training programs',
     items: [
       {
         title: 'AI Art Posters',
@@ -345,7 +391,9 @@ export const en = {
         description: 'Comprehensive AI training program for McNeel Europe employees.',
         tags: ['Corporate Training', 'AI Implementation', 'Education']
       }
-    ]
+    ],
+    viewProject: 'View Project',
+    comingSoon: 'Coming Soon'
   },
   testimonials: {
     title: "Client Testimonials",
@@ -358,8 +406,9 @@ export const en = {
     latestPosts: 'Latest Posts'
   },
   contact: {
+    sectionTitle: 'GET IN TOUCH',
     title: "Let's Work Together",
-    subtitle: 'Ready to transform your business with AI? Get in touch to discuss how we can help you achieve your goals.',
+    subtitle: "Ready to transform your business with AI? Get in touch to discuss how we can help you achieve your goals.",
     form: {
       name: 'Name',
       namePlaceholder: 'Your name',
@@ -418,5 +467,48 @@ export const en = {
   common: {
     loading: "Loading...",
     error: "Something went wrong. Please try again.",
+  },
+  clientStories: {
+    sectionTitle: 'CLIENT SUCCESS STORIES',
+    title: 'Trusted by Innovative Companies',
+    subtitle: 'I\'ve helped these forward-thinking companies transform their operations with AI implementation and training',
+    companies: {
+      mcneel: {
+        name: 'McNeel Europe',
+        description: 'Implemented AI-powered customer service solutions and provided comprehensive AI training for the team.',
+        services: ['AI Implementation', 'Corporate Training', 'Process Automation'],
+        website: 'https://www.rhino3d.com/'
+      },
+      tennis: {
+        name: 'Tennis Express México',
+        description: 'Developed automated content generation systems and optimized customer service workflows.',
+        services: ['AI Integration', 'Workflow Automation', 'Content Generation'],
+        website: 'https://tennisexpress.mx/'
+      },
+      ditesa: {
+        name: 'Ditesa',
+        description: 'Created custom AI solutions for business process automation and staff training programs.',
+        services: ['Process Automation', 'AI Training', 'Custom Development'],
+        website: 'https://www.grupoditesa.com.mx/'
+      },
+      icreatia: {
+        name: 'Icreatia',
+        description: 'Implemented AI tools for digital marketing and provided strategic AI consulting services.',
+        services: ['AI Strategy', 'Digital Marketing', 'Consulting'],
+        website: 'https://www.icreatia.es/'
+      },
+      onePutt: {
+        name: 'One Putt Colombia',
+        description: 'Developed AI-enhanced customer engagement solutions and automated marketing processes.',
+        services: ['Customer Engagement', 'Marketing Automation', 'AI Integration'],
+        website: 'https://oneputtcolombia.com/'
+      },
+      plBienes: {
+        name: 'PL Bienes Raices',
+        description: 'Created AI-powered property matching systems and automated lead generation processes.',
+        services: ['AI Solutions', 'Lead Generation', 'Process Automation'],
+        website: 'https://plbienesraices.com/'
+      }
+    }
   },
 } as const;

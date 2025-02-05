@@ -34,8 +34,9 @@ export function Navigation() {
 
   const routes = [
     { href: '#services', label: translation.navigation.services },
-    { href: '#about', label: translation.navigation.about },
     { href: '/aiconsulting', label: translation.navigation.aiConsulting },
+    { href: '/training', label: translation.navigation.training },
+    { href: '/about', label: translation.navigation.about },
     { href: '/blog', label: translation.navigation.blog },
     { href: '#contact', label: translation.navigation.contact },
   ];

@@ -23,4 +23,4 @@ export function isValidLanguage(lang: string): lang is Language {
   return lang in languages
 }
 
-export const defaultLanguage: Language = 'en'
+export const defaultLanguage: Language = 'es'

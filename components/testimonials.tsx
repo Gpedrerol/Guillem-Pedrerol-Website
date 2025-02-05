@@ -4,6 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Quote } from "lucide-react";
 import { Marquee } from "@/components/ui/marquee";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
+
+interface TestimonialsProps {
+  className?: string;
+}
 
 const testimonials = [
   {
@@ -43,30 +48,35 @@ const testimonials = [
   }
 ];
 
-export function Testimonials() {
+export function Testimonials({ className }: TestimonialsProps) {
   const { translation } = useLanguage();
 
   return (
-    <section id="testimonials" className="scroll-mt-20 py-24 bg-background">
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-20">
+    <section className={cn("bg-muted/30", className)}>
+      <div className="container">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="flex items-center justify-center mb-4">
             <div className="h-px w-8 bg-primary/60"></div>
-            <span className="mx-4 text-sm font-semibold uppercase tracking-wider text-primary/80">What People Say</span>
+            <span className="mx-4 text-sm font-semibold uppercase tracking-wider text-primary/80">
+              {translation.testimonials.sectionTitle}
+            </span>
             <div className="h-px w-8 bg-primary/60"></div>
           </div>
-          <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+          <h2 className="text-4xl font-bold mb-6">
             {translation.testimonials.title}
           </h2>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-lg text-primary/80">
             {translation.testimonials.subtitle}
           </p>
         </div>
 
         <div className="relative">
-          <Marquee className="py-12" pauseOnHover speed={40}>
+          <Marquee className="py-12" pauseOnHover direction="left" speed="normal">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="w-[400px] p-6 mx-4 bg-card">
+              <Card 
+                key={index} 
+                className="w-[400px] p-6 mx-4 bg-card transition-all duration-300 hover:shadow-lg hover:border-primary/20"
+              >
                 <Quote className="h-8 w-8 text-primary mb-4" />
                 <p className="text-muted-foreground mb-4">{testimonial.quote}</p>
                 <div>

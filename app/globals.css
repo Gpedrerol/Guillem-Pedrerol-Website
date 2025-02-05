@@ -157,6 +157,46 @@
   .prose ol {
     @apply list-decimal list-inside mb-4;
   }
+
+  .demo-toggle-button {
+    transition: all 0.2s ease;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    background-color: #3182ce;
+    color: white;
+    margin-top: 1rem;
+  }
+
+  .demo-toggle-button:focus-visible {
+    outline: 2px solid #63b3ed;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.5);
+  }
+
+  .demo-toggle-button:hover {
+    background-color: #2b6cb0;
+  }
+}
+
+/* Loader for Spline component */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Smooth scrolling */
