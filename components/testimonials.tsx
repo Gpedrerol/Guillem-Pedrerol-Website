@@ -63,7 +63,7 @@ export function Testimonials({ className }: TestimonialsProps) {
             <div className="h-px w-8 bg-primary/60"></div>
           </div>
           <h2 className="text-4xl font-bold mb-6">
-            {translation.testimonials.title}
+            {translation.testimonials.heading}
           </h2>
           <p className="text-lg text-primary/80">
             {translation.testimonials.subtitle}
