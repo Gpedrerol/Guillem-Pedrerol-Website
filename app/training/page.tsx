@@ -28,7 +28,7 @@ interface TrainingModuleProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  features: string[];
+  features: readonly string[];
 }
 
 interface BenefitCardProps {
