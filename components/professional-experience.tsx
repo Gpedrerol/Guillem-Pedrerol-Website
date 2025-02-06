@@ -3,81 +3,80 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Briefcase } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const experiences = [
   {
-    title: "AI Implementation Consultant & Corporate Trainer",
+    title: "Consultor de Implementación IA & Formador Corporativo",
     company: "Freelance",
-    period: "Oct 2023 - Present",
-    description: "Providing tailored AI solutions and consulting services for companies like McNeel Europe, TennisExpress México, and RhinoLands. Delivering structured AI formation programs and implementing automation solutions.",
+    period: "Oct 2023 - Presente",
+    description: "Proporciono soluciones de IA personalizadas y servicios de consultoría para empresas como McNeel Europe, TennisExpress México y RhinoLands. Imparto programas de formación estructurados en IA e implemento soluciones de automatización.",
     achievements: [
-      "Developed customized customer service chatbots",
-      "Automated SEO content creation",
-      "Designed master prompts for brand communication"
+      "Desarrollo de chatbots personalizados para atención al cliente",
+      "Automatización de creación de contenido SEO",
+      "Diseño de prompts maestros para comunicación de marca"
     ]
   },
   {
-    title: "Co-founder",
+    title: "Co-fundador",
     company: "AI Art Posters",
-    period: "Sep 2023 - Present",
-    description: "Launched and managed a Shopify-based e-commerce platform selling AI-generated art pieces.",
+    period: "Sep 2023 - Presente",
+    description: "Lanzamiento y gestión de una plataforma de comercio electrónico basada en Shopify que vende piezas de arte generadas por IA.",
     achievements: [
-      "Designed complete Shopify store",
-      "Created artworks using AI tools",
-      "Automated order management"
+      "Diseño completo de tienda Shopify",
+      "Creación de obras de arte usando herramientas de IA",
+      "Automatización de gestión de pedidos"
     ]
   },
   {
-    title: "Founder",
+    title: "Fundador",
     company: "TheTripAI",
     period: "Sep 2022 - Jul 2023",
-    description: "Developed an AI-powered travel planning platform using GPT technology.",
+    description: "Desarrollo de una plataforma de planificación de viajes impulsada por IA utilizando tecnología GPT.",
     achievements: [
-      "Implemented GPT-3 to GPT-4 integration",
-      "Designed dynamic questionnaire system",
-      "Created personalized travel planning algorithms"
+      "Implementación de integración GPT-3 a GPT-4",
+      "Diseño de sistema de cuestionarios dinámicos",
+      "Creación de algoritmos de planificación de viajes personalizados"
     ]
   },
   {
     title: "Account Executive",
     company: "Revolut",
-    period: "Nov 2021 - Aug 2022",
-    description: "Led B2B account management and business development initiatives across the EEA market, focusing on portfolio growth and client success.",
+    period: "Nov 2021 - Ago 2022",
+    description: "Lideré iniciativas de gestión de cuentas B2B y desarrollo de negocios en el mercado EEE, centrándome en el crecimiento de la cartera y el éxito del cliente.",
     achievements: [
-      "Generated new B2B opportunities through strategic outreach",
-      "Managed multimillion-dollar operations",
-      "Optimized client financial operations",
-      "Developed strong client relationships"
+      "Generación de nuevas oportunidades B2B mediante alcance estratégico",
+      "Gestión de operaciones multimillonarias",
+      "Optimización de operaciones financieras de clientes",
+      "Desarrollo de relaciones sólidas con clientes"
     ]
   }
 ];
 
 export function ProfessionalExperience() {
-  const { translation } = useLanguage();
-
   return (
     <div>
       <h3 className="text-2xl font-semibold mb-6 flex items-center gap-2">
         <Briefcase className="h-6 w-6" />
-        {translation.experience.title}
+        Experiencia Profesional
       </h3>
       <div className="space-y-6">
-        {translation.experience.jobs.map((exp, index) => (
+        {experiences.map((experience, index) => (
           <Card key={index} className="p-6">
-            <div className="mb-4">
-              <h4 className="text-xl font-semibold">{exp.title}</h4>
-              <p className="text-primary">{exp.company}</p>
-              <p className="text-sm text-muted-foreground">{exp.period}</p>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+              <div>
+                <h4 className="text-xl font-semibold">{experience.title}</h4>
+                <p className="text-muted-foreground">{experience.company}</p>
+              </div>
+              <Badge variant="secondary" className="mt-2 sm:mt-0">
+                {experience.period}
+              </Badge>
             </div>
-            <p className="text-muted-foreground mb-4">{exp.description}</p>
-            <div className="flex flex-wrap gap-2">
-              {exp.achievements.map((achievement, i) => (
-                <Badge key={i} variant="secondary">
-                  {achievement}
-                </Badge>
+            <p className="mb-4">{experience.description}</p>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+              {experience.achievements.map((achievement, i) => (
+                <li key={i}>{achievement}</li>
               ))}
-            </div>
+            </ul>
           </Card>
         ))}
       </div>

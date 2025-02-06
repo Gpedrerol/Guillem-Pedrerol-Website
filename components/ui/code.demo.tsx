@@ -1,5 +1,6 @@
-'use client'
+'use client';
 
+import { useState } from 'react';
 import { SplineScene } from "@/components/ui/splite";
 import { Card } from "@/components/ui/card"
 import { Spotlight } from "@/components/ui/spotlight"

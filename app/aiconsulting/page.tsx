@@ -13,17 +13,15 @@ import {
   Bot,
   List,
   Search,
-  Tool,
+  Wrench,
   RefreshCw,
   BarChart,
   Link2,
   type LucideIcon,
-  // Add a default icon
   CircleDot,
 } from 'lucide-react';
 import Link from 'next/link';
 import { ContactForm } from '@/components/contact-form';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 
 interface ProcessStepProps {
@@ -52,95 +50,76 @@ interface TechnologyCardProps {
   description: string;
 }
 
-const IconWrapper = ({ Icon }: { Icon: LucideIcon }) => {
-  if (!Icon) return <CircleDot className="h-6 w-6 text-primary" />;
-  return <Icon className="h-6 w-6 text-primary" />;
-};
+function IconWrapper({ Icon }: { Icon: LucideIcon }) {
+  return (
+    <div className="p-2 w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+      <Icon className="w-6 h-6" />
+    </div>
+  );
+}
 
-const ProcessStep: React.FC<ProcessStepProps> = ({ icon: Icon, title, description, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay }}
-    className="relative group"
-  >
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
-      <div className="mb-4 p-3 rounded-full bg-primary/10 w-fit">
-        <IconWrapper Icon={Icon} />
+function ProcessStep({ icon: Icon, title, description, delay = 0 }: ProcessStepProps) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay }}
+      className="flex gap-4"
+    >
+      <IconWrapper Icon={Icon} />
+      <div>
+        <h3 className="text-lg font-semibold mb-2">{title}</h3>
+        <p className="text-muted-foreground">{description}</p>
       </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
+    </motion.div>
+  );
+}
+
+function FeatureCard({ icon: Icon, title, description, className = "" }: FeatureCardProps) {
+  return (
+    <Card className={`p-6 ${className}`}>
+      <div className="flex gap-4">
+        <IconWrapper Icon={Icon} />
+        <div>
+          <h3 className="text-lg font-semibold mb-2">{title}</h3>
+          <p className="text-muted-foreground">{description}</p>
+        </div>
+      </div>
     </Card>
-  </motion.div>
-);
+  );
+}
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ icon: Icon, title, description, className = "" }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className={`group relative ${className}`}
-  >
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
-      <div className="mb-4 p-3 rounded-full bg-primary/10 w-fit">
+function ServiceCard({ icon: Icon, title, description, features }: ServiceCardProps) {
+  return (
+    <Card className="p-6">
+      <div className="mb-6">
         <IconWrapper Icon={Icon} />
       </div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </Card>
-  </motion.div>
-);
-
-const ServiceCard: React.FC<ServiceCardProps> = ({ icon: Icon, title, description, features }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.95 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="group relative"
-  >
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
-      <div className="mb-4 p-3 rounded-full bg-primary/10 w-fit">
-        <IconWrapper Icon={Icon} />
-      </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground mb-4">{description}</p>
+      <p className="text-muted-foreground mb-6">{description}</p>
       <ul className="space-y-2">
-        {features.map((feature, i) => (
-          <li key={i} className="flex items-center gap-2 text-sm">
-            <CheckCircle2 className="h-4 w-4 text-primary" />
-            {feature}
+        {features.map((feature, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+            <span>{feature}</span>
           </li>
         ))}
       </ul>
     </Card>
-  </motion.div>
-);
+  );
+}
 
-const TechnologyCard: React.FC<TechnologyCardProps> = ({ name, description }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.95 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="group relative"
-  >
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
+function TechnologyCard({ name, description }: TechnologyCardProps) {
+  return (
+    <Card className="p-6">
       <h3 className="text-lg font-semibold mb-2">{name}</h3>
-      <p className="text-sm text-muted-foreground">{description}</p>
+      <p className="text-muted-foreground">{description}</p>
     </Card>
-  </motion.div>
-);
+  );
+}
 
 export default function AIConsulting() {
-  const { translation } = useLanguage();
-
-  const processIcons: LucideIcon[] = [List, Search, Tool, RefreshCw];
+  const processIcons: LucideIcon[] = [List, Search, Wrench, RefreshCw];
   const benefitIcons: LucideIcon[] = [Link2, Zap, Brain];
   const serviceIcons: LucideIcon[] = [MessageSquare, BarChart, Bot];
 
@@ -163,10 +142,10 @@ export default function AIConsulting() {
                 className="flex flex-wrap items-center justify-center gap-2 mb-6"
               >
                 <Badge variant="secondary" className="text-sm bg-primary/10 text-primary hover:bg-primary/20">
-                  Available for Projects
+                  Disponible para Proyectos
                 </Badge>
                 <Badge variant="secondary" className="text-sm bg-primary/10 text-primary hover:bg-primary/20">
-                  Remote/On-site
+                  Remoto/Presencial
                 </Badge>
               </motion.div>
               <motion.h1
@@ -175,9 +154,9 @@ export default function AIConsulting() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6"
               >
-                {translation?.aiConsulting?.title}{" "}
+                Consultoría de IA{" "}
                 <span className="block mt-2 bg-gradient-to-r from-primary to-primary/50 text-transparent bg-clip-text">
-                  {translation?.aiConsulting?.titleHighlight}
+                  para tu Negocio
                 </span>
               </motion.h1>
               <motion.p
@@ -186,7 +165,8 @@ export default function AIConsulting() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
               >
-                {translation?.aiConsulting?.subtitle}
+                Transformo negocios implementando soluciones de IA prácticas y efectivas. 
+                Desde chatbots hasta automatización de procesos, te ayudo a aprovechar el poder de la IA.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -196,14 +176,14 @@ export default function AIConsulting() {
               >
                 <Button asChild size="lg" className="relative bg-primary text-primary-foreground hover:bg-primary/90">
                   <Link href="#contact">
-                    {translation?.aiConsulting?.cta?.primary}
+                    Empezar Proyecto
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" asChild className="group">
+                <Button asChild size="lg" variant="outline">
                   <Link href="#services">
-                    {translation?.aiConsulting?.cta?.secondary}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                    Ver Servicios
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </motion.div>
@@ -212,160 +192,131 @@ export default function AIConsulting() {
         </section>
 
         {/* Process Section */}
-        <section className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.process?.title}
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.aiConsulting?.process?.description}
+        <section className="py-20 bg-muted/30" id="process">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Proceso de Trabajo</h2>
+              <p className="text-muted-foreground">
+                Un enfoque estructurado para implementar IA en tu negocio de manera efectiva y medible.
               </p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {translation?.aiConsulting?.process?.steps?.map((step, index) => {
-                const Icon = processIcons[index] || CircleDot;
-                return (
-                  <ProcessStep
-                    key={index}
-                    icon={Icon}
-                    title={step.title}
-                    description={step.description}
-                    delay={index * 0.1}
-                  />
-                );
-              })}
             </div>
-          </div>
-        </section>
-
-        {/* Services Section */}
-        <section id="services" className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.services?.title}
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.aiConsulting?.services?.description}
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {translation?.aiConsulting?.services?.items?.map((service, index) => {
-                const Icon = serviceIcons[index] || CircleDot;
-                return (
-                  <ServiceCard
-                    key={index}
-                    icon={Icon}
-                    title={service.title}
-                    description={service.description}
-                    features={service.features}
-                  />
-                );
-              })}
+            <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <ProcessStep
+                icon={List}
+                title="Análisis y Planificación"
+                description="Evaluamos tus necesidades y objetivos para crear un plan de implementación personalizado."
+                delay={0.1}
+              />
+              <ProcessStep
+                icon={Search}
+                title="Investigación y Diseño"
+                description="Identificamos las mejores soluciones de IA y diseñamos una estrategia de implementación."
+                delay={0.2}
+              />
+              <ProcessStep
+                icon={Wrench}
+                title="Implementación"
+                description="Desarrollamos e integramos las soluciones de IA en tu infraestructura existente."
+                delay={0.3}
+              />
+              <ProcessStep
+                icon={RefreshCw}
+                title="Optimización Continua"
+                description="Monitoreamos y mejoramos el rendimiento para maximizar el retorno de inversión."
+                delay={0.4}
+              />
             </div>
           </div>
         </section>
 
         {/* Benefits Section */}
-        <section className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.benefits?.title}
-              </h2>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {translation?.aiConsulting?.benefits?.items?.map((benefit, index) => {
-                const Icon = benefitIcons[index] || CircleDot;
-                return (
-                  <FeatureCard
-                    key={index}
-                    icon={Icon}
-                    title={benefit.title}
-                    description={benefit.description}
-                  />
-                );
-              })}
+        <section className="py-20" id="benefits">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Beneficios</h2>
+              <p className="text-muted-foreground">
+                Descubre cómo la IA puede transformar tu negocio y mejorar tus resultados.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <FeatureCard
+                icon={Link2}
+                title="Integración Perfecta"
+                description="Implementamos soluciones que se integran perfectamente con tus sistemas existentes."
+              />
+              <FeatureCard
+                icon={Zap}
+                title="Automatización Eficiente"
+                description="Automatiza tareas repetitivas y optimiza procesos para aumentar la productividad."
+              />
+              <FeatureCard
+                icon={Brain}
+                title="Decisiones Inteligentes"
+                description="Utiliza el poder de la IA para tomar decisiones basadas en datos."
+              />
             </div>
           </div>
         </section>
 
-        {/* Technologies Section */}
-        <section className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.technologies?.title}
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.aiConsulting?.technologies?.description}
+        {/* Services Section */}
+        <section className="py-20 bg-muted/30" id="services">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Servicios</h2>
+              <p className="text-muted-foreground">
+                Soluciones personalizadas para diferentes necesidades empresariales.
               </p>
-            </motion.div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {translation?.aiConsulting?.technologies?.tools?.map((tool, index) => (
-                <TechnologyCard
-                  key={index}
-                  name={tool.name}
-                  description={tool.description}
-                />
-              ))}
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <ServiceCard
+                icon={MessageSquare}
+                title="Chatbots y Asistentes"
+                description="Automatiza la atención al cliente y mejora la experiencia del usuario."
+                features={[
+                  "Chatbots personalizados",
+                  "Integración con plataformas existentes",
+                  "Análisis de conversaciones",
+                  "Mejora continua del rendimiento"
+                ]}
+              />
+              <ServiceCard
+                icon={BarChart}
+                title="Análisis Predictivo"
+                description="Anticipa tendencias y toma decisiones informadas."
+                features={[
+                  "Análisis de datos avanzado",
+                  "Modelos predictivos",
+                  "Visualización de datos",
+                  "Informes automatizados"
+                ]}
+              />
+              <ServiceCard
+                icon={Bot}
+                title="Automatización de Procesos"
+                description="Optimiza operaciones y reduce costos operativos."
+                features={[
+                  "Automatización de tareas",
+                  "Flujos de trabajo inteligentes",
+                  "Integración de sistemas",
+                  "Monitoreo y optimización"
+                ]}
+              />
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="max-w-xl mx-auto text-center"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.ctaSection?.title}
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                {translation?.aiConsulting?.ctaSection?.description}
+        <section className="py-20" id="contact">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Contacto</h2>
+              <p className="text-muted-foreground">
+                ¿Listo para transformar tu negocio con IA? Contáctame para discutir tu proyecto.
               </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-xl mx-auto"
-            >
-              <Card className="p-6 backdrop-blur-sm border-primary/10 bg-card/50">
-                <ContactForm />
-              </Card>
-            </motion.div>
+            </div>
+            <div className="max-w-xl mx-auto">
+              <ContactForm />
+            </div>
           </div>
         </section>
       </div>

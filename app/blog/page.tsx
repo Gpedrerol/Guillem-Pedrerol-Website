@@ -1,193 +1,96 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { BlogPost } from '@/types/blog';
-import { BlogProfile } from '@/components/blog-profile';
-import { getUnsplashImage } from '@/utils/unsplash';
-import Image from 'next/image';
+import { Badge } from '@/components/ui/badge';
+import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
-// Temporary blog posts data with Unsplash queries
-const blogPosts: (BlogPost & { imageQuery: string })[] = [
+const posts = [
   {
-    id: '1',
-    title: 'Accelerate Web Development with Bolt.new',
-    excerpt: 'Discover how Bolt.new leverages AI to streamline the creation, editing, and deployment of full-stack web applications directly in your browser.',
-    content: '',
-    date: '2023-11-15',
-    author: 'Guillem Pedrerol',
-    slug: 'accelerate-web-development-bolt-new',
-    imageQuery: 'modern web development code screen',
-    coverImage: '',
-    unsplashCredit: null,
-    tags: ['AI', 'Web Development', 'Full-Stack', 'Deployment']
+    title: "Implementación de GPT-4 en Empresas",
+    description: "Una guía práctica sobre cómo implementar GPT-4 en tu empresa de manera efectiva y segura.",
+    date: "2024-02-01",
+    category: "IA",
+    image: "/images/blog/gpt4-implementation.jpg",
+    slug: "implementacion-gpt4-empresas"
   },
   {
-    id: '2',
-    title: 'Getting Started with ChatGPT: A Developer\'s Guide',
-    excerpt: 'Learn how to leverage ChatGPT\'s API to build powerful AI-powered applications and enhance your development workflow.',
-    content: '',
-    date: '2023-03-20',
-    author: 'Guillem Pedrerol',
-    slug: 'getting-started-chatgpt-developers-guide',
-    imageQuery: 'artificial intelligence computer code',
-    coverImage: '',
-    unsplashCredit: null,
-    tags: ['AI', 'ChatGPT', 'API', 'Tutorial']
+    title: "El Futuro del Trabajo con IA",
+    description: "Cómo la IA está transformando el lugar de trabajo y qué habilidades serán necesarias en el futuro.",
+    date: "2024-01-15",
+    category: "Tendencias",
+    image: "/images/blog/future-of-work.jpg",
+    slug: "futuro-trabajo-ia"
   },
   {
-    id: '3',
-    title: 'Building AI-Powered User Interfaces',
-    excerpt: 'Explore modern techniques for creating intuitive and responsive AI-powered user interfaces that enhance user experience.',
-    content: '',
-    date: '2023-03-15',
-    author: 'Guillem Pedrerol',
-    slug: 'building-ai-powered-interfaces',
-    imageQuery: 'modern user interface artificial intelligence design',
-    coverImage: '',
-    unsplashCredit: null,
-    tags: ['AI', 'UI/UX', 'Frontend', 'Design']
+    title: "Automatización de Procesos con IA",
+    description: "Descubre cómo automatizar tareas repetitivas y optimizar procesos empresariales utilizando IA.",
+    date: "2024-01-01",
+    category: "Automatización",
+    image: "/images/blog/process-automation.jpg",
+    slug: "automatizacion-procesos-ia"
   }
 ];
 
-export default function BlogPage() {
-  const { translation } = useLanguage();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [posts, setPosts] = useState(blogPosts);
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      const updatedPosts = await Promise.all(
-        posts.map(async (post) => {
-          const photo = await getUnsplashImage(post.imageQuery, post.slug);
-          if (photo) {
-            return {
-              ...post,
-              coverImage: photo.url,
-              unsplashCredit: {
-                name: photo.authorName,
-                username: photo.authorUsername
-              }
-            };
-          }
-          return post;
-        })
-      );
-      setPosts(updatedPosts);
-    };
-
-    fetchImages();
-  }, []);
-
-  const filteredPosts = posts.filter(post =>
-    post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    post.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
-  );
-
+export default function Blog() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Blog</h1>
-          <div className="flex items-center gap-6">
-            <Input
-              type="search"
-              placeholder="Search posts..."
-              className="w-64 bg-muted/50"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <nav className="flex gap-4">
-              <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
-                Articles
-              </Link>
-              <Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">
-                About
-              </Link>
-            </nav>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="py-16 md:py-24">
+        <div className="container">
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <h1 className="text-4xl font-bold mb-4">Blog</h1>
+            <p className="text-lg text-muted-foreground">
+              Artículos sobre IA, desarrollo de software y transformación digital
+            </p>
           </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12">
-          <aside className="hidden lg:block">
-            <BlogProfile />
-          </aside>
-
-          <main className="space-y-8">
-            {filteredPosts.map((post) => (
-              <article key={post.id} className="group">
-                <div className="flex gap-6 items-start">
-                  <div className="relative w-48 h-32 flex-shrink-0 overflow-hidden rounded-md">
-                    {post.coverImage && (
-                      <>
-                        <Link href={`/blog/${post.slug}`}>
-                          <Image
-                            src={post.coverImage}
-                            alt={post.title}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          />
-                        </Link>
-                        {post.unsplashCredit && (
-                          <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            Photo by{' '}
-                            <a
-                              href={`https://unsplash.com/@${post.unsplashCredit.username}?utm_source=guillempedrerol&utm_medium=referral`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="hover:underline"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              {post.unsplashCredit.name}
-                            </a>
-                            {' '}on{' '}
-                            <a
-                              href="https://unsplash.com/?utm_source=guillempedrerol&utm_medium=referral"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="hover:underline"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              Unsplash
-                            </a>
-                          </div>
-                        )}
-                      </>
-                    )}
+      {/* Blog Posts Grid */}
+      <section className="pb-16 md:pb-24">
+        <div className="container">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {posts.map((post, index) => (
+              <Link key={index} href={`/blog/${post.slug}`}>
+                <Card className="group overflow-hidden">
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
                   </div>
-                  <Link href={`/blog/${post.slug}`} className="flex-1">
-                    <div className="flex gap-2 mb-2">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                  <div className="p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Badge variant="secondary">{post.category}</Badge>
+                      <span className="text-sm text-muted-foreground">
+                        {new Date(post.date).toLocaleDateString('es-ES', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
                     </div>
                     <h2 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
-                    <p className="text-muted-foreground text-sm mb-2">{post.excerpt}</p>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <time>{new Date(post.date).toLocaleDateString('en-US', { 
-                        year: 'numeric',
-                        month: 'long'
-                      })}</time>
-                      <span>•</span>
-                      <span className="text-primary hover:underline">Read more →</span>
+                    <p className="text-muted-foreground mb-4">
+                      {post.description}
+                    </p>
+                    <div className="flex items-center text-primary font-medium">
+                      Leer más
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>
-                  </Link>
-                </div>
-              </article>
+                  </div>
+                </Card>
+              </Link>
             ))}
-          </main>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,127 +1,79 @@
 'use client';
 
-import * as React from 'react';
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { 
-  ArrowRight, 
+  ArrowRight,
   Brain,
   CheckCircle2,
-  Lightbulb,
-  Zap,
   Users,
   Target,
-  Sparkles,
-  Settings,
-  Workflow,
-  Rocket,
+  Zap,
+  Lightbulb,
+  LineChart,
   type LucideIcon,
-  CircleDot,
 } from 'lucide-react';
 import Link from 'next/link';
 import { ContactForm } from '@/components/contact-form';
-import { useLanguage } from '@/contexts/LanguageContext';
 import { motion } from 'framer-motion';
 
-interface TrainingModuleProps {
+interface FeatureCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  features: string[];
 }
 
-interface BenefitCardProps {
+interface TrainingProgramProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  className?: string;
+  benefits: string[];
 }
 
-interface MethodologyStepProps {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  delay?: number;
+function IconWrapper({ Icon }: { Icon: LucideIcon }) {
+  return (
+    <div className="p-2 w-12 h-12 shrink-0 flex items-center justify-center rounded-lg bg-primary/10 text-primary">
+      <Icon className="w-6 h-6" />
+    </div>
+  );
 }
 
-const IconWrapper = ({ Icon }: { Icon: LucideIcon }) => {
-  if (!Icon) return <CircleDot className="h-6 w-6 text-primary" />;
-  return <Icon className="h-6 w-6 text-primary" />;
-};
-
-const MethodologyStep: React.FC<MethodologyStepProps> = ({ icon: Icon, title, description, delay = 0 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5, delay }}
-    className="relative group"
-  >
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
-      <div className="mb-4 p-3 rounded-full bg-primary/10 w-fit">
+function FeatureCard({ icon: Icon, title, description }: FeatureCardProps) {
+  return (
+    <Card className="p-6">
+      <div className="flex gap-4">
         <IconWrapper Icon={Icon} />
+        <div>
+          <h3 className="text-lg font-semibold mb-2">{title}</h3>
+          <p className="text-muted-foreground">{description}</p>
+        </div>
       </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
     </Card>
-  </motion.div>
-);
+  );
+}
 
-const BenefitCard: React.FC<BenefitCardProps> = ({ icon: Icon, title, description, className = "" }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className={`group relative ${className}`}
-  >
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
-      <div className="mb-4 p-3 rounded-full bg-primary/10 w-fit">
+function TrainingProgram({ icon: Icon, title, description, benefits }: TrainingProgramProps) {
+  return (
+    <Card className="p-6">
+      <div className="mb-6">
         <IconWrapper Icon={Icon} />
       </div>
       <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground">{description}</p>
-    </Card>
-  </motion.div>
-);
-
-const TrainingModule: React.FC<TrainingModuleProps> = ({ icon: Icon, title, description, features }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.95 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="group relative"
-  >
-    <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-primary/5 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-0 group-hover:opacity-100" />
-    <Card className="relative p-6 backdrop-blur-sm border-primary/10 group-hover:border-primary/20 transition-all duration-300 bg-card/50">
-      <div className="mb-4 p-3 rounded-full bg-primary/10 w-fit">
-        <IconWrapper Icon={Icon} />
-      </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-muted-foreground mb-4">{description}</p>
+      <p className="text-muted-foreground mb-6">{description}</p>
       <ul className="space-y-2">
-        {features.map((feature, i) => (
-          <li key={i} className="flex items-center gap-2 text-sm">
-            <CheckCircle2 className="h-4 w-4 text-primary" />
-            {feature}
+        {benefits.map((benefit, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+            <span>{benefit}</span>
           </li>
         ))}
       </ul>
     </Card>
-  </motion.div>
-);
+  );
+}
 
-export default function CorporateTraining() {
-  const { translation } = useLanguage();
-
-  const methodologyIcons: LucideIcon[] = [Target, Users, Settings, Workflow];
-  const benefitIcons: LucideIcon[] = [Brain, Zap, Rocket];
-  const moduleIcons: LucideIcon[] = [Lightbulb, Sparkles, Brain];
-
+export default function Training() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-background to-background/80">
       {/* Grid Background */}
@@ -141,10 +93,10 @@ export default function CorporateTraining() {
                 className="flex flex-wrap items-center justify-center gap-2 mb-6"
               >
                 <Badge variant="secondary" className="text-sm bg-primary/10 text-primary hover:bg-primary/20">
-                  {translation?.training?.badges?.customized}
+                  Programas Personalizados
                 </Badge>
                 <Badge variant="secondary" className="text-sm bg-primary/10 text-primary hover:bg-primary/20">
-                  {translation?.training?.badges?.remote}
+                  Presencial/Online
                 </Badge>
               </motion.div>
               <motion.h1
@@ -153,9 +105,9 @@ export default function CorporateTraining() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6"
               >
-                {translation?.training?.title}{" "}
+                Formación en IA{" "}
                 <span className="block mt-2 bg-gradient-to-r from-primary to-primary/50 text-transparent bg-clip-text">
-                  {translation?.training?.titleHighlight}
+                  para Empresas
                 </span>
               </motion.h1>
               <motion.p
@@ -164,7 +116,8 @@ export default function CorporateTraining() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
               >
-                {translation?.training?.subtitle}
+                Programas de formación personalizados para ayudar a tu equipo a dominar 
+                las últimas tecnologías de IA y aplicarlas en tu negocio.
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -174,14 +127,14 @@ export default function CorporateTraining() {
               >
                 <Button asChild size="lg" className="relative bg-primary text-primary-foreground hover:bg-primary/90">
                   <Link href="#contact">
-                    {translation?.training?.cta?.primary}
+                    Solicitar Información
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button variant="outline" size="lg" asChild className="group">
-                  <Link href="#modules">
-                    {translation?.training?.cta?.secondary}
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <Button asChild size="lg" variant="outline">
+                  <Link href="#programs">
+                    Ver Programas
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </motion.div>
@@ -189,135 +142,94 @@ export default function CorporateTraining() {
           </div>
         </section>
 
-        {/* Methodology Section */}
-        <section className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.training?.methodology?.title}
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.training?.methodology?.description}
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {translation?.training?.methodology?.steps?.map((step, index) => {
-                const Icon = methodologyIcons[index] || CircleDot;
-                return (
-                  <MethodologyStep
-                    key={index}
-                    icon={Icon}
-                    title={step.title}
-                    description={step.description}
-                    delay={index * 0.1}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Training Modules Section */}
-        <section id="modules" className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.training?.modules?.title}
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.training?.modules?.description}
-              </p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {translation?.training?.modules?.items?.map((module, index) => {
-                const Icon = moduleIcons[index] || CircleDot;
-                return (
-                  <TrainingModule
-                    key={index}
-                    icon={Icon}
-                    title={module.title}
-                    description={module.description}
-                    features={module.features}
-                  />
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* Benefits Section */}
-        <section className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.training?.benefits?.title}
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.training?.benefits?.description}
+        <section className="py-20" id="benefits">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">¿Por qué Elegirnos?</h2>
+              <p className="text-muted-foreground">
+                Formación práctica y efectiva para implementar IA en tu empresa
               </p>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {translation?.training?.benefits?.items?.map((benefit, index) => {
-                const Icon = benefitIcons[index] || CircleDot;
-                return (
-                  <BenefitCard
-                    key={index}
-                    icon={Icon}
-                    title={benefit.title}
-                    description={benefit.description}
-                  />
-                );
-              })}
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <FeatureCard
+                icon={Target}
+                title="Enfoque Práctico"
+                description="Aprende a través de casos reales y ejercicios prácticos aplicables a tu negocio."
+              />
+              <FeatureCard
+                icon={Users}
+                title="Formación Personalizada"
+                description="Programas adaptados a las necesidades específicas de tu equipo y sector."
+              />
+              <FeatureCard
+                icon={Zap}
+                title="Resultados Inmediatos"
+                description="Implementa lo aprendido desde el primer día en tu empresa."
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Programs Section */}
+        <section className="py-20 bg-muted/30" id="programs">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Programas de Formación</h2>
+              <p className="text-muted-foreground">
+                Elige el programa que mejor se adapte a tus necesidades
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <TrainingProgram
+                icon={Brain}
+                title="Fundamentos de IA"
+                description="Comprende los conceptos básicos de la IA y sus aplicaciones empresariales."
+                benefits={[
+                  "Conceptos fundamentales de IA",
+                  "Casos de uso prácticos",
+                  "Evaluación de soluciones",
+                  "Implementación básica"
+                ]}
+              />
+              <TrainingProgram
+                icon={Lightbulb}
+                title="IA Avanzada"
+                description="Profundiza en técnicas avanzadas y casos de uso específicos."
+                benefits={[
+                  "Técnicas avanzadas de IA",
+                  "Integración de sistemas",
+                  "Optimización de modelos",
+                  "Casos de estudio avanzados"
+                ]}
+              />
+              <TrainingProgram
+                icon={LineChart}
+                title="Estrategia de IA"
+                description="Desarrolla una estrategia de IA efectiva para tu empresa."
+                benefits={[
+                  "Planificación estratégica",
+                  "Gestión de proyectos de IA",
+                  "Medición de resultados",
+                  "Escalabilidad y mantenimiento"
+                ]}
+              />
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="relative py-20 border-t border-primary/10">
-          <div className="container relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="max-w-xl mx-auto text-center"
-            >
-              <h2 className="text-3xl font-bold mb-4">
-                {translation?.training?.ctaSection?.title}
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                {translation?.training?.ctaSection?.description}
+        <section className="py-20" id="contact">
+          <div className="container">
+            <div className="max-w-2xl mx-auto text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Contacto</h2>
+              <p className="text-muted-foreground">
+                ¿Interesado en nuestros programas? Contáctanos para más información.
               </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="max-w-xl mx-auto"
-            >
-              <Card className="p-6 backdrop-blur-sm border-primary/10 bg-card/50">
-                <ContactForm />
-              </Card>
-            </motion.div>
+            </div>
+            <div className="max-w-xl mx-auto">
+              <ContactForm />
+            </div>
           </div>
         </section>
       </div>

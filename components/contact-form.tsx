@@ -24,29 +24,27 @@ import {
 } from '@/components/ui/select';
 import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const formSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Invalid email address'),
-  company: z.string().min(2, 'Company name must be at least 2 characters'),
+  name: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
+  email: z.string().email('Dirección de email inválida'),
+  company: z.string().min(2, 'El nombre de la empresa debe tener al menos 2 caracteres'),
   service: z.string({
-    required_error: 'Please select a service',
+    required_error: 'Por favor selecciona un servicio',
   }),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  message: z.string().min(10, 'El mensaje debe tener al menos 10 caracteres'),
 });
 
 const services = [
-  'aiImplementation',
-  'corporateTraining',
-  'processAutomation',
-  'customDevelopment',
-  'other',
+  { id: 'aiImplementation', label: 'Implementación de IA' },
+  { id: 'corporateTraining', label: 'Formación Corporativa' },
+  { id: 'processAutomation', label: 'Automatización de Procesos' },
+  { id: 'customDevelopment', label: 'Desarrollo Personalizado' },
+  { id: 'other', label: 'Otro' },
 ];
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { translation } = useLanguage();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,13 +52,14 @@ export function ContactForm() {
       name: '',
       email: '',
       company: '',
+      service: '',
       message: '',
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
     try {
-      setIsSubmitting(true);
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
@@ -70,18 +69,18 @@ export function ContactForm() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to send message');
+        throw new Error('Error al enviar el formulario');
       }
 
       toast({
-        title: 'Message sent successfully!',
-        description: "Thank you for reaching out. I'll get back to you soon.",
+        title: '¡Mensaje enviado!',
+        description: 'Me pondré en contacto contigo pronto.',
       });
       form.reset();
     } catch (error) {
       toast({
-        title: 'Error sending message',
-        description: 'Please try again later or contact me directly via email.',
+        title: 'Error',
+        description: 'Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo.',
         variant: 'destructive',
       });
     } finally {
@@ -91,29 +90,30 @@ export function ContactForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <div className="grid gap-4 sm:grid-cols-2">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{translation.contact.form.name}</FormLabel>
+                <FormLabel>Nombre</FormLabel>
                 <FormControl>
-                  <Input placeholder={translation.contact.form.namePlaceholder} {...field} />
+                  <Input placeholder="Tu nombre" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{translation.contact.form.email}</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder={translation.contact.form.emailPlaceholder} {...field} />
+                  <Input placeholder="tu@email.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -121,36 +121,37 @@ export function ContactForm() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid gap-4 sm:grid-cols-2">
           <FormField
             control={form.control}
             name="company"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{translation.contact.form.company}</FormLabel>
+                <FormLabel>Empresa</FormLabel>
                 <FormControl>
-                  <Input placeholder={translation.contact.form.companyPlaceholder} {...field} />
+                  <Input placeholder="Nombre de tu empresa" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="service"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{translation.contact.form.service}</FormLabel>
+                <FormLabel>Servicio</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder={translation.contact.form.servicePlaceholder} />
+                      <SelectValue placeholder="Selecciona un servicio" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     {services.map((service) => (
-                      <SelectItem key={service} value={service}>
-                        {translation.contact.form.serviceOptions[service]}
+                      <SelectItem key={service.id} value={service.id}>
+                        {service.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -166,11 +167,11 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{translation.contact.form.message}</FormLabel>
+              <FormLabel>Mensaje</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder={translation.contact.form.messagePlaceholder}
-                  className="min-h-[120px]"
+                  placeholder="¿En qué puedo ayudarte?"
+                  className="resize-none"
                   {...field}
                 />
               </FormControl>
@@ -181,10 +182,10 @@ export function ContactForm() {
 
         <Button
           type="submit"
-          className="w-full md:w-auto"
+          className={cn('w-full', isSubmitting && 'opacity-50 cursor-not-allowed')}
           disabled={isSubmitting}
         >
-          {isSubmitting ? translation.contact.form.sending : translation.contact.form.submit}
+          {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
         </Button>
       </form>
     </Form>
