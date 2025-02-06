@@ -44,7 +44,7 @@ export default function About() {
                   <h2 className="text-2xl font-bold mb-6">{translation.about.professionalExperience}</h2>
                   <div className="space-y-4">
                     <p className="text-muted-foreground">
-                      {translation.about.description}
+                      {translation.about.title}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary">
