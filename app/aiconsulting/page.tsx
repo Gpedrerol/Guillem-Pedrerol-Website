@@ -13,7 +13,7 @@ import {
   Bot,
   List,
   Search,
-  Tool,
+  Wrench,
   RefreshCw,
   BarChart,
   Link2,
@@ -140,7 +140,7 @@ const TechnologyCard: React.FC<TechnologyCardProps> = ({ name, description }) =>
 export default function AIConsulting() {
   const { translation } = useLanguage();
 
-  const processIcons: LucideIcon[] = [List, Search, Tool, RefreshCw];
+  const processIcons: LucideIcon[] = [List, Search, Wrench, RefreshCw];
   const benefitIcons: LucideIcon[] = [Link2, Zap, Brain];
   const serviceIcons: LucideIcon[] = [MessageSquare, BarChart, Bot];
 
