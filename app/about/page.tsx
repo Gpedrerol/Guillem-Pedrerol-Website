@@ -41,10 +41,10 @@ export default function About() {
               {/* About Me */}
               <div className="flex flex-col gap-8">
                 <div>
-                  <h2 className="text-2xl font-bold mb-6">{translation.about.aboutMe}</h2>
+                  <h2 className="text-2xl font-bold mb-6">{translation.about.title}</h2>
                   <div className="space-y-4">
                     <p className="text-muted-foreground">
-                      {translation.about.title}
+                      {translation.about.description}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary">
