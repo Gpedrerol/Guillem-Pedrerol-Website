@@ -6,7 +6,7 @@ export const { useI18n, useScopedI18n, I18nProviderClient } = createI18nClient({
   es: () => import('../messages/es.json')
 })
 
-export const { getI18n, getScopedI18n, I18nProviderServer } = createI18nServer({
+export const { getI18n, getScopedI18n } = createI18nServer({
   en: () => import('../messages/en.json'),
   es: () => import('../messages/es.json')
 })
