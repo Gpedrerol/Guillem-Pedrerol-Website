@@ -150,7 +150,7 @@ export function ContactForm() {
                   <SelectContent>
                     {services.map((service) => (
                       <SelectItem key={service} value={service}>
-                        {translation.contact.form.serviceOptions[service]}
+                        {translation.contact.form.serviceOptions[service as keyof typeof translation.contact.form.serviceOptions]}
                       </SelectItem>
                     ))}
                   </SelectContent>
