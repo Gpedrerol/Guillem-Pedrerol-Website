@@ -31,7 +31,7 @@ export default function About() {
               {translation.about.title}
             </h1>
             <p className="text-center text-primary/80">
-              {translation.about.subtitle}
+              {translation.about.description}
             </p>
           </div>
 
