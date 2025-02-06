@@ -23,7 +23,7 @@ export default function About() {
             <div className="flex items-center justify-center mb-4">
               <div className="h-px w-8 bg-primary/60"></div>
               <span className="mx-4 text-sm font-semibold uppercase tracking-wider text-primary/80">
-                {translation.about.sectionTitle}
+                {translation.about.title}
               </span>
               <div className="h-px w-8 bg-primary/60"></div>
             </div>
