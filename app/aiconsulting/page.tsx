@@ -172,21 +172,21 @@ export default function AIConsulting() {
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5 }}
                 className="text-4xl md:text-5xl lg:text-7xl font-bold mb-6"
               >
-                {translation?.aiConsulting?.title}{" "}
+                {translation.services.consultation.title}{" "}
                 <span className="block mt-2 bg-gradient-to-r from-primary to-primary/50 text-transparent bg-clip-text">
-                  {translation?.aiConsulting?.titleHighlight}
+                  {translation.services.consultation.description}
                 </span>
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
               >
-                {translation?.aiConsulting?.subtitle}
+                {translation.services.consultation.description}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -196,13 +196,13 @@ export default function AIConsulting() {
               >
                 <Button asChild size="lg" className="relative bg-primary text-primary-foreground hover:bg-primary/90">
                   <Link href="#contact">
-                    {translation?.aiConsulting?.cta?.primary}
+                    {translation.services.consultation.cta?.primary}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild className="group">
                   <Link href="#services">
-                    {translation?.aiConsulting?.cta?.secondary}
+                    {translation.services.consultation.cta?.secondary}
                     <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -222,14 +222,14 @@ export default function AIConsulting() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold text-center mb-4">
-                {translation?.aiConsulting?.process?.title}
+                {translation.services.consultation.process?.title}
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.aiConsulting?.process?.steps[0]?.description}
+                {translation.services.consultation.process?.steps[0]?.description}
               </p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {translation?.aiConsulting?.process?.steps?.map((step, index) => {
+              {translation.services.consultation.process?.steps?.map((step, index) => {
                 const Icon = processIcons[index] || CircleDot;
                 return (
                   <ProcessStep
@@ -256,14 +256,14 @@ export default function AIConsulting() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.services?.title}
+                {translation.services.consultation.services?.title}
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.aiConsulting?.services?.description}
+                {translation.services.consultation.services?.description}
               </p>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {translation?.aiConsulting?.services?.items?.map((service, index) => {
+              {translation.services.consultation.services?.items?.map((service, index) => {
                 const Icon = serviceIcons[index] || CircleDot;
                 return (
                   <ServiceCard
@@ -290,11 +290,11 @@ export default function AIConsulting() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.benefits?.title}
+                {translation.services.consultation.benefits?.title}
               </h2>
             </motion.div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {translation?.aiConsulting?.benefits?.items?.map((benefit, index) => {
+              {translation.services.consultation.benefits?.items?.map((benefit, index) => {
                 const Icon = benefitIcons[index] || CircleDot;
                 return (
                   <FeatureCard
@@ -320,14 +320,14 @@ export default function AIConsulting() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.technologies?.title}
+                {translation.services.consultation.technologies?.title}
               </h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                {translation?.aiConsulting?.technologies?.description}
+                {translation.services.consultation.technologies?.description}
               </p>
             </motion.div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {translation?.aiConsulting?.technologies?.tools?.map((tool, index) => (
+              {translation.services.consultation.technologies?.tools?.map((tool, index) => (
                 <TechnologyCard
                   key={index}
                   name={tool.name}
@@ -349,10 +349,10 @@ export default function AIConsulting() {
               className="max-w-xl mx-auto text-center"
             >
               <h2 className="text-3xl font-bold mb-4">
-                {translation?.aiConsulting?.ctaSection?.title}
+                {translation.services.consultation.ctaSection?.title}
               </h2>
               <p className="text-muted-foreground mb-8">
-                {translation?.aiConsulting?.ctaSection?.description}
+                {translation.services.consultation.ctaSection?.description}
               </p>
             </motion.div>
             <motion.div
