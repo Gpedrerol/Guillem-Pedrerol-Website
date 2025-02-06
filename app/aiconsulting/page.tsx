@@ -44,7 +44,7 @@ interface ServiceCardProps {
   icon: LucideIcon;
   title: string;
   description: string;
-  features: string[];
+  features: readonly string[];
 }
 
 interface TechnologyCardProps {
