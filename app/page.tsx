@@ -97,11 +97,11 @@ export default function Home() {
               <div className="relative mx-auto max-w-sm lg:max-w-[90%]">
                 <Image
                   src="/images/Human and AI 2.png"
-                  alt="AI and Human Connection"
+                  alt="Guillem Pedrerol collaborating with AI - Illustrative visualization of human-AI partnership"
                   width={700}
-                  height={875}
-                  className="rounded-lg shadow-xl w-full object-cover transition-all duration-500 hover:scale-[1.02]"
+                  height={500}
                   priority
+                  className="w-full h-auto object-contain"
                 />
                 <div className="absolute inset-0 bg-primary/10 rounded-lg mix-blend-multiply"></div>
               </div>
