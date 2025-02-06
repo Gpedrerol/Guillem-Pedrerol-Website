@@ -1,7 +1,7 @@
-import { en } from '../translations/en'
-import { es } from '../translations/es'
-import en from '@/messages/en.json'
-import es from '@/messages/es.json'
+import { en as enTranslation } from '../translations/en'
+import { es as esTranslation } from '../translations/es'
+import enMessages from '@/messages/en.json'
+import esMessages from '@/messages/es.json'
 
 export const languages = {
   en: 'English',
@@ -22,11 +22,11 @@ type TranslationBase = {
   // Add other shared properties here
 }
 
-export type Translation = typeof en | typeof es
+export type Translation = typeof enMessages | typeof esMessages
 
 const translations: Record<Language, Translation> = {
-  en,
-  es,
+  en: enMessages,
+  es: esMessages,
 }
 
 export function getTranslation(locale: Language): Translation {
