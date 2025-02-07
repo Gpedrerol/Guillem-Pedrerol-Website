@@ -6,23 +6,39 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 import { Menu, X } from 'lucide-react';
-import { handleNavigation } from '@/utils/navigation';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
 
 export function Navigation() {
   const [isOpen, setIsOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const pathname = usePathname();
 
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Handle scroll to section when coming from another page
-  useEffect(() => {
-    if (pathname === '/') {
+  React.useEffect(() => {
+    if (mounted && pathname === '/') {
       const hash = window.location.hash;
       if (hash) {
-        handleNavigation(hash.substring(1));
+        const element = document.getElementById(hash.substring(1));
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
       }
     }
-  }, [pathname]);
+  }, [pathname, mounted]);
+
+  if (!mounted) {
+    return (
+      <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <nav className="container flex h-14 items-center justify-between">
+          <div className="font-bold">Guillem Pedrerol</div>
+        </nav>
+      </header>
+    );
+  }
 
   return (
     <header className="fixed top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -43,17 +59,6 @@ export function Navigation() {
         {/* Desktop navigation */}
         <div className="hidden md:flex md:items-center md:gap-6">
           <Link
-            href="/services"
-            className={cn(
-              'text-sm font-medium transition-colors hover:text-primary',
-              pathname === '/services'
-                ? 'text-foreground'
-                : 'text-foreground/60'
-            )}
-          >
-            Servicios
-          </Link>
-          <Link
             href="/aiconsulting"
             className={cn(
               'text-sm font-medium transition-colors hover:text-primary',
@@ -62,7 +67,7 @@ export function Navigation() {
                 : 'text-foreground/60'
             )}
           >
-            AI Consulting
+            Consultoría IA
           </Link>
           <Link
             href="/training"
@@ -84,7 +89,7 @@ export function Navigation() {
                 : 'text-foreground/60'
             )}
           >
-            Sobre mí
+            Sobre Mí
           </Link>
           <Link
             href="/blog"
@@ -97,67 +102,64 @@ export function Navigation() {
           >
             Blog
           </Link>
-          <Link
-            href="/contact"
-            className={cn(
-              'text-sm font-medium transition-colors hover:text-primary',
-              pathname === '/contact'
-                ? 'text-foreground'
-                : 'text-foreground/60'
-            )}
-          >
-            Contacto
-          </Link>
           <ModeToggle />
         </div>
 
         {/* Mobile navigation */}
         {isOpen && (
-          <div className="absolute left-0 right-0 top-14 bg-background md:hidden">
-            <div className="flex flex-col space-y-4 p-4">
-              <Link
-                href="/services"
-                className="text-sm font-medium transition-colors hover:text-primary"
-                onClick={() => setIsOpen(false)}
-              >
-                Servicios
-              </Link>
+          <div className="absolute top-14 left-0 right-0 bg-background border-b md:hidden">
+            <div className="container py-4 space-y-4">
               <Link
                 href="/aiconsulting"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className={cn(
+                  'block text-sm font-medium transition-colors hover:text-primary',
+                  pathname === '/aiconsulting'
+                    ? 'text-foreground'
+                    : 'text-foreground/60'
+                )}
                 onClick={() => setIsOpen(false)}
               >
-                AI Consulting
+                Consultoría IA
               </Link>
               <Link
                 href="/training"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className={cn(
+                  'block text-sm font-medium transition-colors hover:text-primary',
+                  pathname === '/training'
+                    ? 'text-foreground'
+                    : 'text-foreground/60'
+                )}
                 onClick={() => setIsOpen(false)}
               >
                 Formación
               </Link>
               <Link
                 href="/about"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className={cn(
+                  'block text-sm font-medium transition-colors hover:text-primary',
+                  pathname === '/about'
+                    ? 'text-foreground'
+                    : 'text-foreground/60'
+                )}
                 onClick={() => setIsOpen(false)}
               >
-                Sobre mí
+                Sobre Mí
               </Link>
               <Link
                 href="/blog"
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className={cn(
+                  'block text-sm font-medium transition-colors hover:text-primary',
+                  pathname === '/blog'
+                    ? 'text-foreground'
+                    : 'text-foreground/60'
+                )}
                 onClick={() => setIsOpen(false)}
               >
                 Blog
               </Link>
-              <Link
-                href="/contact"
-                className="text-sm font-medium transition-colors hover:text-primary"
-                onClick={() => setIsOpen(false)}
-              >
-                Contacto
-              </Link>
-              <ModeToggle />
+              <div className="pt-4">
+                <ModeToggle />
+              </div>
             </div>
           </div>
         )}

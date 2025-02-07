@@ -34,14 +34,15 @@ export default function Home() {
               </div>
             </div>
             <div className="flex-1">
-              <Image
-                src="/images/hero-image.png"
-                alt="AI Solutions"
-                width={600}
-                height={600}
-                className="rounded-3xl"
-                priority
-              />
+              <div className="relative w-full aspect-square">
+                <Image
+                  src="/images/hero-image.png"
+                  alt="AI Solutions"
+                  fill
+                  className="rounded-3xl object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>

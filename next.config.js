@@ -5,13 +5,18 @@ const nextConfig = {
   },
   
   images: {
-    domains: ['unsplash.com'],
+    domains: ['unsplash.com', 'images.unsplash.com'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: '**.unsplash.com',
       },
     ],
+  },
+
+  // Enable static exports for specific pages while keeping SSR for others
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
   },
 }
 
