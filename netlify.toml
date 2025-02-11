@@ -1,6 +1,17 @@
 [build]
+  # Common build commands:
+  # React: npm run build
+  # Next.js: next build
+  # Vue: npm run build
+  # Gatsby: gatsby build
   command = "npm run build"
-  publish = ".next"
+  
+  # Common publish directories:
+  # React: build
+  # Next.js: .next
+  # Vue: dist
+  # Gatsby: public
+  publish = "build"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"

@@ -14,6 +14,7 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { cn } from "@/lib/utils";
 
 // Project images mapping with local images
 const projectImages = {
@@ -29,11 +30,15 @@ const projectLinks = {
   'McNeel Europe Training': 'https://www.rhino3d.com'
 };
 
-export function Projects() {
+interface ProjectsProps {
+  className?: string;
+}
+
+export function Projects({ className }: ProjectsProps) {
   const { translation } = useLanguage();
 
   return (
-    <section id="projects" className="scroll-mt-20 py-12 bg-background">
+    <section id="projects" className={cn("scroll-mt-20 py-12 bg-background", className)}>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <div className="flex items-center justify-center mb-4">
